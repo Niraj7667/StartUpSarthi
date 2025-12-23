@@ -37,16 +37,26 @@ body {
   font-size: 16px;
   font-weight: 500;
   cursor: pointer;
-  transition: background-color 0.2s;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  text-decoration: none;
 }
 
 .btn:hover {
   background: #2563eb;
+  transform: translateY(-1px);
 }
 
 .btn:disabled {
   background: #94a3b8;
   cursor: not-allowed;
+  transform: none;
+}
+
+.btn:active {
+  transform: translateY(0);
 }
 
 .input {
@@ -56,11 +66,13 @@ body {
   border-radius: 8px;
   font-size: 16px;
   transition: border-color 0.2s;
+  font-family: inherit;
 }
 
 .input:focus {
   outline: none;
   border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .textarea {
@@ -78,6 +90,7 @@ body {
 .textarea:focus {
   outline: none;
   border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
 }
 
 .status-required {
@@ -98,7 +111,7 @@ body {
 .confidence-high {
   background: #dcfce7;
   color: #166534;
-  padding: 2px 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
@@ -107,7 +120,7 @@ body {
 .confidence-medium {
   background: #fef3c7;
   color: #92400e;
-  padding: 2px 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
@@ -116,7 +129,7 @@ body {
 .confidence-low {
   background: #fee2e2;
   color: #991b1b;
-  padding: 2px 8px;
+  padding: 4px 8px;
   border-radius: 4px;
   font-size: 12px;
   font-weight: 500;
@@ -124,9 +137,11 @@ body {
 
 .loading {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   padding: 40px;
+  gap: 16px;
 }
 
 .spinner {
@@ -149,6 +164,16 @@ body {
   padding: 16px;
   border-radius: 8px;
   margin: 20px 0;
+  border: 1px solid #fecaca;
+}
+
+.success {
+  background: #dcfce7;
+  color: #166534;
+  padding: 16px;
+  border-radius: 8px;
+  margin: 20px 0;
+  border: 1px solid #bbf7d0;
 }
 
 .next-action {
@@ -162,4 +187,151 @@ body {
 .next-action h3 {
   color: #1e40af;
   margin-bottom: 8px;
+}
+
+/* Modal Styles */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 12px;
+  padding: 24px;
+  width: 100%;
+  max-width: 400px;
+  margin: 20px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+}
+
+/* Score Display */
+.score-display {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: white;
+  margin: 0 auto;
+}
+
+.score-high {
+  background: linear-gradient(135deg, #10b981, #059669);
+}
+
+.score-medium {
+  background: linear-gradient(135deg, #f59e0b, #d97706);
+}
+
+.score-low {
+  background: linear-gradient(135deg, #ef4444, #dc2626);
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .container {
+    padding: 0 16px;
+  }
+  
+  .card {
+    padding: 16px;
+    margin-bottom: 16px;
+  }
+  
+  .btn {
+    padding: 10px 20px;
+    font-size: 14px;
+  }
+  
+  .modal-content {
+    margin: 16px;
+    padding: 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .container {
+    padding: 0 12px;
+  }
+  
+  .card {
+    padding: 12px;
+  }
+  
+  h1 {
+    font-size: 1.5rem !important;
+  }
+  
+  h2 {
+    font-size: 1.25rem !important;
+  }
+}
+
+/* Animation for cards */
+.card {
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+}
+
+/* Progress indicators */
+.progress-bar {
+  width: 100%;
+  height: 8px;
+  background-color: #e5e7eb;
+  border-radius: 4px;
+  overflow: hidden;
+}
+
+.progress-fill {
+  height: 100%;
+  background: linear-gradient(90deg, #3b82f6, #1d4ed8);
+  transition: width 0.3s ease;
+}
+
+/* Badge styles */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 12px;
+  border-radius: 16px;
+  font-size: 12px;
+  font-weight: 500;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: #166534;
+}
+
+.badge-warning {
+  background: #fef3c7;
+  color: #92400e;
+}
+
+.badge-error {
+  background: #fee2e2;
+  color: #991b1b;
+}
+
+.badge-info {
+  background: #dbeafe;
+  color: #1e40af;
 }
